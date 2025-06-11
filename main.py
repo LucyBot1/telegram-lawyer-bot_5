@@ -26,6 +26,14 @@ async def start_bot():
 # Создаём задачу запуска бота параллельно с веб-сервером
 @app.on_event("startup")
 async def on_startup():
+    @dp.message_handler()
+async def text_handler(message: types.Message):
+    text = message.text.lower()
+
+    if "что ты умеешь" in text:
+        await message.answer("Я могу отвечать на юридические вопросы и помогать с созданием документов.")
+    else:
+        await message.answer("Пожалуйста, уточни свой юридический вопрос.")
     asyncio.create_task(start_bot())
 
 if __name__ == "__main__":
